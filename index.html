@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>WFCloud APP</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="css/onsenui.css">
+  <link rel="stylesheet" href="css/onsen-css-components.min.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+  <template id="main">
+    <v-ons-navigator :page-stack="pageStack">
+      <component :is="page" v-for="page in pageStack" :page-stack="pageStack"></component>
+    </v-ons-navigator>
+  </template>
+
+  <template id="loginPage">
+    <v-ons-page>
+      <div class="loginPage">
+        <div class="logo"><img src="WFCloudLogo.png"></div>
+        <div class="loginForm">
+          <v-ons-input type="email" v-ons-model="user.email" class="text-input--underbar" placeholder="Email"></v-ons-input>
+          <v-ons-input type="password" v-ons-model="user.password" class="text-input--underbar" placeholder="Password"></v-ons-input>
+          <br><br>
+          <ons-button v-show="validation.email && validation.password" modifier="large" @click="login" class="login-button">Log In</ons-button>
+          <br/><br/>
+          <div class="desc">
+            <span v-show="!validation.email">Please provide a valid email address.</span><br/>
+            <span v-show="!validation.password">Password cannot be empty.</span>
+          </div><br/>
+          <p class="desc">POWER by WFCloud @ 2017
+            <p/>
+        </div>
+      </div>
+    </v-ons-page>
+  </template>
+
+  <template id="mainPage">
+    <v-ons-page>
+      <v-ons-toolbar>
+        <div class="center">
+          <slot>Devices</slot>
+        </div>
+      </v-ons-toolbar>
+      <ons-list>
+        <ons-list-item modifier="chevron tappable" class="plan" v-for="device in devices">
+          <ons-row>
+            <ons-col width="80px" class="plan-left">
+              <div class="plan-date">{{ device.key }}</div>
+              <div class="plan-duration">{{ device.product}}</div>
+            </ons-col>
+
+            <ons-col width="6px" class="plan-center" ng-style="{backgroundColor:a % 3 == 1 ? '#3399ff' : '#ccc'}">
+            </ons-col>
+
+            <ons-col class="plan-right">
+              <div class="plan-name">{{ device.name}}</div>
+
+              <div class="plan-info">
+                <div>
+                  <ons-icon class="plan-icon" icon="fa-phone"></ons-icon>{{ device.gpios }}
+                </div>
+              </div>
+            </ons-col>
+
+          </ons-row>
+        </ons-list-item>
+      </ons-list>
+    </v-ons-page>
+  </template>
+
+  <template id="controlPage">
+    <v-ons-page>
+      <custom-toolbar>Controller</custom-toolbar>
+      <p style="text-align: center">This is the second page</p>
+    </v-ons-page>
+  </template>
+
+  <template id="custom-toolbar">
+    <v-ons-toolbar>
+      <div class="left">
+        <v-ons-back-button>{{ backLabel }}</v-ons-back-button>
+      </div>
+      <div class="center">
+        <slot></slot>
+      </div>
+    </v-ons-toolbar>
+  </template>
+
+  <div id="app"></div>
+</body>
+<script src="js/vue.min.js"></script>
+<script src="js/onsenui.min.js"></script>
+<script src="js/vue-onsenui.js"></script>
+<script src="app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+<script src="https://cloud.wf8266.com/app/wf8266r.js"></script>
+
+</html>
