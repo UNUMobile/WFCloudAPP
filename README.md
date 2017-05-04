@@ -3,7 +3,7 @@ https://cloud.wf8266.com
 # 教學
 https://sites.google.com/view/wfcloud
 # WF8266R.js API
-物件名稱 wf8266r
+##物件名稱 wf8266r
 
 login(email, password, callback)
 <pre>使用 WFCloud 物聯雲帳號和密碼登入，回傳所有設備資訊</pre>
