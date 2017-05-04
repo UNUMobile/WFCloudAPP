@@ -48,11 +48,11 @@
         <ons-list-item modifier="chevron tappable" class="plan" v-for="device in devices">
           <ons-row>
             <ons-col width="80px" class="plan-left">
-              <div class="plan-date">{{ device.key }}</div>
+              <div class="plan-date"><span v-bind:class="{label:true, online:device.online, offline:!device.online}">{{ device.key }}</span></div>
               <div class="plan-duration">{{ device.product}}</div>
             </ons-col>
 
-            <ons-col width="6px" class="plan-center" ng-style="{backgroundColor:a % 3 == 1 ? '#3399ff' : '#ccc'}">
+            <ons-col width="2px" class="plan-center" v-bind:style="{backgroundColor: device.online == 1 ? '#3399ff' : '#ccc'}">
             </ons-col>
 
             <ons-col class="plan-right">
@@ -60,7 +60,7 @@
 
               <div class="plan-info">
                 <div>
-                  <ons-icon class="plan-icon" icon="fa-phone"></ons-icon>{{ device.gpios }}
+                  <ons-icon class="plan-icon" icon="fa-phone"></ons-icon>{{ device.config }}
                 </div>
               </div>
             </ons-col>

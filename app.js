@@ -2,6 +2,16 @@ var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(
 var currentStack;
 var myDevices;
 
+//watch device events
+function bindDeviceEvent(){
+  wf8266r.watchAll(function(data){
+    myDevices.devices[data.index].online = true;
+
+    if(data.type == "CONFIG")
+      myDevices.devices[data.index].config = data;
+  })
+}
+
 const customToolbar = {
   template: '#custom-toolbar',
   props: ['backLabel']
@@ -45,6 +55,7 @@ const loginPage = {
         wf8266r.login(this.user.email, this.user.password, function (data) {
           console.log(data);
           myDevices = data;
+          bindDeviceEvent();
           currentStack.push(mainPage);
         })
       }

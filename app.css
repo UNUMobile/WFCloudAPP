@@ -18,6 +18,27 @@
   margin: 100px auto 0;
 }
 
+.label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+.online {
+    background-color: #003b7f;
+}
+
+.offline {
+    background-color: #ccc;
+}
+
 input[type=email], input[type=password] {
   display: block;
   width: 100%;
